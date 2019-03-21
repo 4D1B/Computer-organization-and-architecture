@@ -1,0 +1,76 @@
+.model small
+.stack 100h
+.data
+
+MSG1 db 'The sum of $'
+num1 db ?  
+msg2 db ' and $' 
+num2 db ?
+msg3  db ' is $ '
+NUM3 DB ?
+
+msg4 db 'However if we multiply '
+msg5 db 'and '
+msg6 db 'the product will be '
+msg7 db 'onthe other hand if we subtract '
+msg8 db 'and '
+msg9 db 'the result will be '
+
+.code
+main proc
+    
+    mov ax,@data
+    mov ds,ax
+    
+    mov ah,1
+    int 21h
+    mov num1,al
+    
+    int 21h
+    mov num2,al 
+    
+    add bl,num1
+    SUB BL,48
+    add bl,num2 
+    SUB BL,48
+    mov num3,bl 
+    ADD NUM3,48
+    
+    
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H
+     
+    MOV AH,2 
+    MOV DL,NUM1
+    INT 21H 
+      
+    LEA DX,MSG2 
+    MOV AH,9
+    INT 21H 
+    
+    MOV AH,2
+    MOV DL,NUM2
+    INT 21H    
+           
+     LEA DX,MSG3 
+    MOV AH,9
+    INT 21H      
+           
+           
+    MOV AH,2
+    MOV DL,NUM3
+    INT 21H 
+    
+     
+     
+    SUB AL,0
+    MOV AL,NUM1
+    SUB AL,AL
+    
+    
+    LEA DX,MSG7 
+    MOV AH,9
+    INT 21H 
+
+  ENDP         
